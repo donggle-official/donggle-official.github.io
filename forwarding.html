@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forwarding Request — Donggle 🐾</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2; --brown: #2C1810; --warm: #8B4513;
+    --accent: #D47B3F; --soft: #F0E6D3; --paw: #C4956A; --text: #3D2314;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); }
+
+  nav { padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; background: var(--cream); border-bottom: 1px solid rgba(196,149,106,0.15); }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--brown); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .back-link { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.2s; }
+  .back-link:hover { opacity: 1; }
+
+  .form-hero { background: var(--brown); color: var(--cream); padding: 3rem 2.5rem; }
+  .form-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 0.8rem; }
+  .form-hero p { opacity: 0.7; font-size: 0.95rem; line-height: 1.7; max-width: 500px; }
+
+  .form-wrap { max-width: 720px; margin: 3rem auto; padding: 0 2rem; }
+
+  .form-section { margin-bottom: 2.5rem; }
+  .form-section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--brown);
+    padding-bottom: 0.8rem;
+    border-bottom: 1.5px solid rgba(196,149,106,0.2);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  label { font-size: 0.85rem; font-weight: 600; color: var(--brown); opacity: 0.8; }
+  .required { color: var(--accent); }
+  input, select, textarea {
+    padding: 0.75rem 1rem; border-radius: 10px;
+    border: 1.5px solid rgba(196,149,106,0.25);
+    background: white; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(212,123,63,0.1);
+  }
+  textarea { resize: vertical; min-height: 100px; }
+  select { cursor: pointer; }
+
+  .checkbox-group { display: flex; flex-direction: column; gap: 0.7rem; }
+  .checkbox-item { display: flex; align-items: flex-start; gap: 0.7rem; cursor: pointer; }
+  .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .checkbox-item input[type="radio"] { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .check-label { font-size: 0.88rem; line-height: 1.5; }
+  .check-label strong { color: var(--brown); }
+  .check-label span { opacity: 0.6; display: block; font-size: 0.8rem; }
+
+  .info-box {
+    background: var(--soft); border-radius: 12px;
+    padding: 1rem 1.2rem; margin-bottom: 1.5rem;
+    font-size: 0.85rem; line-height: 1.6; opacity: 0.8;
+    display: flex; gap: 0.6rem;
+  }
+
+  .submit-btn {
+    width: 100%; background: var(--brown); color: var(--cream);
+    padding: 1rem; border-radius: 50px; border: none;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .notice {
+    background: rgba(212,123,63,0.08); border: 1.5px solid rgba(212,123,63,0.2);
+    border-radius: 12px; padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem; font-size: 0.85rem; line-height: 1.7;
+  }
+  .notice strong { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .form-hero { padding: 2rem 1.5rem; }
+    .form-wrap { padding: 0 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="en.html" class="logo">Donggle <span>🐾</span></a>
+  <a href="en.html" class="back-link">← Back to home</a>
+</nav>
+
+<div class="form-hero">
+  <h1>📦 Forwarding Request</h1>
+  <p>Fill in the details below to register your incoming package. Make sure to enter your tracking number correctly.</p>
+</div>
+
+<div class="form-wrap">
+
+  <div class="notice">
+    <strong>📌 Before you submit:</strong> All fees are fixed and non-negotiable. By submitting this form, you agree to our Terms of Service. Packages with no tracking number registered may experience delays.
+  </div>
+
+  <form action="https://formspree.io/YOUR_FORM_ID" method="POST">
+
+    <!-- PERSONAL INFO -->
+    <div class="form-section">
+      <div class="form-section-title">👤 Your Information</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name <span class="required">*</span></label>
+          <input type="text" name="name" placeholder="Jane Doe" required>
+        </div>
+        <div class="form-group">
+          <label>Email <span class="required">*</span></label>
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Country <span class="required">*</span></label>
+          <select name="country" required>
+            <option value="">Select your country</option>
+            <option>United States</option><option>United Kingdom</option><option>Canada</option>
+            <option>Australia</option><option>Japan</option><option>China</option>
+            <option>Taiwan</option><option>Hong Kong</option><option>Singapore</option>
+            <option>Malaysia</option><option>Thailand</option><option>Philippines</option>
+            <option>Indonesia</option><option>Vietnam</option><option>India</option>
+            <option>France</option><option>Germany</option><option>Spain</option>
+            <option>Italy</option><option>Netherlands</option><option>Poland</option>
+            <option>Brazil</option><option>Mexico</option><option>Chile</option>
+            <option>Argentina</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>SNS / Contact</label>
+          <input type="text" name="sns" placeholder="@yourhandle (Twitter/Instagram)">
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE INFO -->
+    <div class="form-section">
+      <div class="form-section-title">📦 Package Details</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tracking Number <span class="required">*</span></label>
+          <input type="text" name="tracking" placeholder="e.g. 1234567890KR" required>
+        </div>
+        <div class="form-group">
+          <label>Store / Seller Name <span class="required">*</span></label>
+          <input type="text" name="store" placeholder="e.g. Weverse Shop, SM Store" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Item Description <span class="required">*</span></label>
+          <input type="text" name="item" placeholder="e.g. BTS Album x3, Aespa Photocard" required>
+        </div>
+        <div class="form-group">
+          <label>Estimated Item Value (₩)</label>
+          <input type="text" name="value" placeholder="e.g. 50000">
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOMIZING -->
+    <div class="form-section">
+      <div class="form-section-title">✂️ Customizing Service (Optional)</div>
+      <div class="info-box">📌 All customizing services are video recorded. Additional fees apply.</div>
+      <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" name="unboxing" value="yes">
+          <div class="check-label">
+            <strong>Unboxing (Item Selection) — ₩1,000/album</strong>
+            <span>Open album and select specific items. Remaining items disposed of with your consent.</span>
+          </div>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="inclusion_only" value="yes">
+          <div class="check-label">
+            <strong>Inclusion-only Shipping — Free</strong>
+            <span>Send label/official goodies only. Album disposed of. Consent required.</span>
+          </div>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" name="battery" value="yes">
+          <div class="check-label">
+            <strong>Battery Removal — ₩1,000/item</strong>
+            <span>Remove batteries before shipping (required for air freight in some cases).</span>
+          </div>
+        </label>
+      </div>
+
+      <div style="margin-top:1.2rem">
+        <div class="form-group">
+          <label>Customizing Notes</label>
+          <textarea name="custom_notes" placeholder="Specify which items to keep, remove, or any special requests..."></textarea>
+        </div>
+      </div>
+
+      <label class="checkbox-item" style="margin-top:1rem">
+        <input type="checkbox" name="disposal_consent" value="yes">
+        <div class="check-label">
+          <strong>I consent to album/item disposal</strong>
+          <span>Required if requesting unboxing or inclusion-only shipping.</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- SHIPPING PREFERENCE -->
+    <div class="form-section">
+      <div class="form-section-title">✈️ Shipping Preference</div>
+      <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="radio" name="shipping_pref" value="EMS">
+          <div class="check-label"><strong>EMS (Recommended)</strong><span>Fast & reliable. 200+ countries.</span></div>
+        </label>
+        <label class="checkbox-item">
+          <input type="radio" name="shipping_pref" value="K-Packet">
+          <div class="check-label"><strong>K-Packet (Budget)</strong><span>Under 2kg. Available to 19 countries.</span></div>
+        </label>
+        <label class="checkbox-item">
+          <input type="radio" name="shipping_pref" value="SF Express">
+          <div class="check-label"><strong>SF Express (Asia)</strong><span>Best for China, HK, Taiwan.</span></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="form-section">
+      <div class="form-section-title">📝 Additional Notes</div>
+      <div class="form-group">
+        <label>Any special requests or notes?</label>
+        <textarea name="notes" placeholder="Fragile items, special packaging requests, etc."></textarea>
+      </div>
+    </div>
+
+    <input type="hidden" name="_subject" value="[Donggle] New Forwarding Request">
+    <input type="hidden" name="_replyto" value="">
+
+    <button type="submit" class="submit-btn">📦 Submit Forwarding Request</button>
+  </form>
+
+  <p style="text-align:center; margin-top:1.5rem; font-size:0.82rem; opacity:0.5;">
+    Questions? <a href="mailto:donggle.official@gmail.com" style="color:var(--accent);">donggle.official@gmail.com</a>
+  </p>
+</div>
+
+</body>
+</html>
