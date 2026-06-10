@@ -49,10 +49,14 @@
 
   .checkbox-group { display: flex; flex-direction: column; gap: 0.7rem; }
   .checkbox-item { display: flex; align-items: flex-start; gap: 0.7rem; cursor: pointer; }
-  .checkbox-item input[type="radio"] { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .checkbox-item input[type="radio"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
   .check-label { font-size: 0.88rem; line-height: 1.5; }
   .check-label strong { color: var(--brown); }
   .check-label span { opacity: 0.6; display: block; font-size: 0.8rem; }
+
+  /* ADDRESS FIELDS */
+  .address-fields { margin-top: 1rem; display: none; }
+  .address-fields.visible { display: block; }
 
   .notice { background: rgba(212,123,63,0.08); border: 1.5px solid rgba(212,123,63,0.2); border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 2rem; font-size: 0.85rem; line-height: 1.7; }
   .notice strong { color: var(--accent); }
@@ -114,7 +118,11 @@
             <option>France</option><option>Germany</option><option>Spain</option>
             <option>Italy</option><option>Netherlands</option><option>Poland</option>
             <option>Brazil</option><option>Mexico</option><option>Chile</option>
-            <option>Argentina</option><option>Other</option>
+            <option>Argentina</option><option>New Zealand</option><option>Sweden</option>
+            <option>Norway</option><option>Denmark</option><option>Finland</option>
+            <option>Belgium</option><option>Austria</option><option>Switzerland</option>
+            <option>Portugal</option><option>Turkey</option><option>UAE</option>
+            <option>Saudi Arabia</option><option>South Africa</option>
           </select>
         </div>
         <div class="form-group">
@@ -127,7 +135,6 @@
     <!-- ITEMS -->
     <div class="form-section">
       <div class="form-section-title">🛒 Items to Purchase</div>
-
       <div id="items-container">
         <div class="item-block">
           <span class="item-num">Item 1</span>
@@ -163,7 +170,6 @@
           </div>
         </div>
       </div>
-
       <button type="button" class="add-item-btn" onclick="addItem()">+ Add Another Item</button>
     </div>
 
@@ -177,24 +183,68 @@
       <p style="font-size:0.78rem; opacity:0.6; margin-top:0.8rem;">* Shipping fees are quoted separately after items arrive.</p>
     </div>
 
-    <!-- DELIVERY ADDRESS -->
+    <!-- DELIVERY PREFERENCE -->
     <div class="form-section">
       <div class="form-section-title">📍 Delivery Preference</div>
       <div class="checkbox-group">
         <label class="checkbox-item">
-          <input type="radio" name="delivery_pref" value="donggle_warehouse" checked>
+          <input type="radio" name="delivery_pref" value="donggle_warehouse" checked onchange="toggleAddress(this)">
           <div class="check-label">
             <strong>Send to Donggle Warehouse (Recommended)</strong>
             <span>We'll hold and ship when you're ready. Full tracking & inspection included.</span>
           </div>
         </label>
         <label class="checkbox-item">
-          <input type="radio" name="delivery_pref" value="direct_ship">
+          <input type="radio" name="delivery_pref" value="other_address" onchange="toggleAddress(this)">
           <div class="check-label">
-            <strong>Direct to My Address</strong>
-            <span>Ship directly to you. Note: tracking updates may be limited.</span>
+            <strong>Ship to Another Address</strong>
+            <span>Ship directly to a different address. Note: tracking updates may be limited.</span>
           </div>
         </label>
+      </div>
+
+      <!-- ADDRESS INPUT (shown when 'other address' selected) -->
+      <div class="address-fields" id="address-fields">
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(196,149,106,0.2);">
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Recipient Name <span class="required">*</span></label>
+              <input type="text" name="recipient_name" placeholder="Full name of the recipient">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Street Address <span class="required">*</span></label>
+              <input type="text" name="alt_address_line1" placeholder="Street address, apartment, suite, etc.">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>City <span class="required">*</span></label>
+              <input type="text" name="alt_city" placeholder="City">
+            </div>
+            <div class="form-group">
+              <label>State / Province</label>
+              <input type="text" name="alt_state" placeholder="State / Province">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Postal Code <span class="required">*</span></label>
+              <input type="text" name="alt_zip" placeholder="ZIP / Postal code">
+            </div>
+            <div class="form-group">
+              <label>Country <span class="required">*</span></label>
+              <input type="text" name="alt_country" placeholder="Country">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="text" name="alt_phone" placeholder="Include country code, e.g. +1 555 000 0000">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -208,7 +258,6 @@
     </div>
 
     <input type="hidden" name="_subject" value="[Donggle] New Proxy Purchase Request">
-
     <button type="submit" class="submit-btn">🛍️ Submit Proxy Purchase Request</button>
   </form>
 
@@ -219,6 +268,15 @@
 
 <script>
 let itemCount = 1;
+
+function toggleAddress(radio) {
+  const fields = document.getElementById('address-fields');
+  if (radio.value === 'other_address') {
+    fields.classList.add('visible');
+  } else {
+    fields.classList.remove('visible');
+  }
+}
 
 function addItem() {
   itemCount++;
