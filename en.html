@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donggle 🐾 — K-goods, packed with love</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --brown: #2C1810;
+    --warm: #8B4513;
+    --accent: #D47B3F;
+    --soft: #F0E6D3;
+    --paw: #C4956A;
+    --text: #3D2314;
+    --light: #B8976E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* LANG TOGGLE */
+  .lang-bar {
+    background: var(--soft);
+    padding: 0.4rem 2.5rem;
+    display: flex; justify-content: flex-end; align-items: center;
+    font-size: 0.8rem; gap: 0.8rem;
+  }
+  .lang-bar span { opacity: 0.5; }
+  .lang-btn {
+    background: none; border: 1.5px solid rgba(44,24,16,0.2);
+    border-radius: 50px; padding: 0.2rem 0.8rem;
+    font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; color: var(--brown);
+    transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active { background: var(--brown); color: var(--cream); border-color: var(--brown); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,247,242,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,149,106,0.15);
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--brown);
+    text-decoration: none; letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--text);
+    font-size: 0.9rem; font-weight: 500;
+    opacity: 0.7; transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    background: var(--brown) !important;
+    color: var(--cream) !important;
+    padding: 0.55rem 1.4rem !important;
+    border-radius: 50px !important;
+    opacity: 1 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex; align-items: center;
+    padding: 5rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(212,123,63,0.08) 0%, transparent 70%);
+  }
+  .paw-float {
+    position: absolute; font-size: 8rem; opacity: 0.04;
+    animation: floatPaw 6s ease-in-out infinite;
+  }
+  .paw-float:nth-child(1) { top: 15%; right: 10%; animation-delay: 0s; }
+  .paw-float:nth-child(2) { top: 55%; right: 25%; font-size: 5rem; animation-delay: 2s; }
+  .paw-float:nth-child(3) { bottom: 20%; right: 5%; font-size: 6rem; animation-delay: 4s; }
+  @keyframes floatPaw {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  .hero-content { max-width: 680px; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--soft); color: var(--warm);
+    padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.05; color: var(--brown);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 1.05rem; line-height: 1.8;
+    color: var(--text); opacity: 0.75;
+    max-width: 500px; margin-bottom: 2.5rem;
+  }
+  .hero-sub p { margin-bottom: 0.5rem; }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--brown); color: var(--cream);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 600;
+    font-size: 0.95rem; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: var(--brown);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500;
+    font-size: 0.95rem;
+    border: 1.5px solid rgba(44,24,16,0.2);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STATS */
+  .stats {
+    background: var(--soft);
+    padding: 2.5rem 2.5rem;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    text-align: center; gap: 1px;
+    border-top: 1px solid rgba(196,149,106,0.15);
+    border-bottom: 1px solid rgba(196,149,106,0.15);
+  }
+  .stat-item { padding: 1.2rem; }
+  .stat-item:not(:last-child) { border-right: 1px solid rgba(44,24,16,0.08); }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; color: var(--brown);
+    margin-bottom: 0.3rem;
+  }
+  .stat-label { font-size: 0.82rem; opacity: 0.55; }
+
+  /* SECTION COMMON */
+  section { padding: 6rem 2.5rem; }
+  .section-tag {
+    display: inline-block;
+    background: var(--soft); color: var(--warm);
+    padding: 0.35rem 0.9rem; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--brown); line-height: 1.15;
+    margin-bottom: 1rem; letter-spacing: -0.02em;
+  }
+  .section-sub {
+    font-size: 1rem; color: var(--text);
+    opacity: 0.65; max-width: 500px; line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* SERVICES */
+  .services { background: var(--soft); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .service-card {
+    background: var(--cream); border-radius: 20px;
+    padding: 2rem; transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(196,149,106,0.1);
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(44,24,16,0.08); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--soft); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .service-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; color: var(--brown);
+    margin-bottom: 0.6rem;
+  }
+  .service-card p { font-size: 0.9rem; opacity: 0.65; line-height: 1.6; }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--accent); font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; margin-top: 1.2rem;
+    transition: gap 0.2s;
+  }
+  .service-link:hover { gap: 0.7rem; }
+
+  /* WHY DONGGLE */
+  .why { background: var(--cream); }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.8rem; max-width: 900px; margin: 0 auto;
+  }
+  .why-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--soft); border-radius: 14px;
+  }
+  .why-check {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--brown); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; flex-shrink: 0; margin-top: 0.1rem;
+  }
+  .why-item p { font-size: 0.9rem; line-height: 1.5; color: var(--text); }
+
+  /* PRICING */
+  .pricing-wrap { max-width: 900px; margin: 0 auto; }
+  .pricing-tabs {
+    display: flex; gap: 0.5rem;
+    background: var(--soft); padding: 0.4rem;
+    border-radius: 50px; width: fit-content;
+    margin-bottom: 2.5rem;
+  }
+  .tab-btn {
+    padding: 0.55rem 1.5rem; border-radius: 50px;
+    border: none; cursor: pointer; font-size: 0.9rem;
+    font-weight: 500; transition: all 0.2s;
+    background: transparent; color: var(--text); opacity: 0.6;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn.active { background: var(--brown); color: var(--cream); opacity: 1; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .price-table {
+    width: 100%; border-collapse: collapse;
+    background: var(--cream); border-radius: 16px;
+    overflow: hidden; box-shadow: 0 4px 30px rgba(44,24,16,0.05);
+  }
+  .price-table th {
+    background: var(--brown); color: var(--cream);
+    padding: 1rem 1.5rem; text-align: left;
+    font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .price-table td {
+    padding: 0.9rem 1.5rem; font-size: 0.9rem;
+    border-bottom: 1px solid rgba(196,149,106,0.1);
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:nth-child(even) td { background: rgba(240,230,211,0.3); }
+  .price-highlight { color: var(--accent); font-weight: 600; }
+  .price-note {
+    background: var(--soft); border-radius: 12px;
+    padding: 1rem 1.5rem; margin-top: 1rem;
+    font-size: 0.85rem; opacity: 0.7; line-height: 1.6;
+  }
+
+  /* HOW IT WORKS */
+  .how { background: var(--soft); }
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .step { text-align: center; padding: 1rem; }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--brown); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; margin: 0 auto 1rem;
+  }
+  .step h4 { font-weight: 600; font-size: 0.9rem; color: var(--brown); margin-bottom: 0.5rem; }
+  .step p { font-size: 0.82rem; opacity: 0.65; line-height: 1.5; }
+
+  /* SHIPPING */
+  .shipping-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; max-width: 900px;
+  }
+  .ship-card {
+    background: var(--soft); border-radius: 16px;
+    padding: 1.5rem; border: 1.5px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .ship-card:hover { border-color: var(--paw); }
+  .ship-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .ship-card h4 { font-weight: 600; color: var(--brown); margin-bottom: 0.3rem; }
+  .ship-card p { font-size: 0.85rem; opacity: 0.65; line-height: 1.5; }
+  .ship-tag {
+    display: inline-block; background: var(--cream);
+    color: var(--accent); font-size: 0.75rem; font-weight: 600;
+    padding: 0.2rem 0.7rem; border-radius: 50px; margin-top: 0.8rem;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--cream);
+    text-align: center; padding: 6rem 2.5rem;
+  }
+  .about-inner {
+    max-width: 640px; margin: 0 auto;
+  }
+  .about .section-title { color: var(--brown); }
+  .about-body {
+    font-size: 1rem; line-height: 1.9;
+    color: var(--text); opacity: 0.72;
+    margin-bottom: 1.2rem;
+  }
+  .paw-big { font-size: 4rem; margin-bottom: 1.5rem; }
+
+  /* CONTACT */
+  .contact { background: var(--soft); }
+  .contact-inner { max-width: 720px; }
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 2rem;
+    background: var(--brown); border-radius: 20px; padding: 2rem;
+  }
+  .contact-item {
+    background: rgba(250,247,242,0.08); border-radius: 14px;
+    padding: 1.2rem 1.5rem; text-decoration: none;
+    color: var(--cream); transition: background 0.2s;
+    display: flex; align-items: center; gap: 0.8rem;
+    min-width: 0;
+  }
+  .contact-item:hover { background: rgba(250,247,242,0.15); }
+  .contact-item span:first-child { font-size: 1.3rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.75rem; opacity: 0.5; display: block; margin-bottom: 0.1rem; }
+  .contact-val {
+    font-size: 0.85rem; font-weight: 500;
+    word-break: break-all; overflow-wrap: anywhere;
+  }
+  .contact-text { min-width: 0; flex: 1; }
+
+  /* FOOTER */
+  footer {
+    background: #1A0E08; color: rgba(250,247,242,0.5);
+    padding: 2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.82rem;
+  }
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    color: var(--cream); font-size: 1.2rem;
+    text-decoration: none;
+  }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a {
+    color: rgba(250,247,242,0.5); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* KR HIDDEN */
+  [lang="kr"] { display: none; }
+  body.kr [lang="en"] { display: none; }
+  body.kr [lang="kr"] { display: block; }
+  body.kr .hero-sub [lang="kr"] { display: block; }
+  body.kr .hero-sub [lang="en"] { display: none; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .lang-bar { padding: 0.4rem 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .stats { grid-template-columns: 1fr; }
+    .stat-item:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(44,24,16,0.08); }
+    section { padding: 4rem 1.5rem; }
+    .how-steps { grid-template-columns: repeat(2, 1fr); }
+    .how-steps .step:last-child { grid-column: 1 / -1; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+  <button class="lang-btn" onclick="setLang('kr')" id="btn-kr">한국어</button>
+</div>
+
+<nav>
+  <a href="en.html" class="logo">Donggle <span>🐾</span></a>
+  <div class="nav-links">
+    <a href="#services" lang="en">Services</a>
+    <a href="#services" lang="kr">서비스</a>
+    <a href="#pricing" lang="en">Pricing</a>
+    <a href="#pricing" lang="kr">요금</a>
+    <a href="#shipping" lang="en">Shipping</a>
+    <a href="#shipping" lang="kr">배송</a>
+    <a href="#about" lang="en">About</a>
+    <a href="#about" lang="kr">소개</a>
+    <a href="#contact" class="nav-cta" lang="en">Contact Us</a>
+    <a href="#contact" class="nav-cta" lang="kr">문의하기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="paw-float">🐾</div>
+  <div class="paw-float">🐾</div>
+  <div class="paw-float">🐾</div>
+  <div class="hero-content">
+    <div class="hero-tag">🐾 Since 2021 · Trusted by fans worldwide</div>
+    <h1 lang="en">Can't Buy It<br>From Korea?<br><em>We'll Get It</em><br>For You.</h1>
+    <h1 lang="kr" style="display:none;">한국에서<br>못 사시나요?<br><em>저희가 해드려요.</em></h1>
+    <div class="hero-sub">
+      <p lang="en">From K-pop merchandise and pop-up exclusives to everyday Korean products,</p>
+      <p lang="en">Donggle helps fans worldwide shop Korea with ease.</p>
+      <p lang="kr" style="display:none;">K팝 굿즈부터 팝업 한정판까지,</p>
+      <p lang="kr" style="display:none;">전 세계 팬들의 한국 쇼핑을 동글이 도와드립니다.</p>
+    </div>
+    <div class="hero-buttons">
+      <a href="forwarding.html" class="btn-primary">📦 <span lang="en">Start Forwarding</span><span lang="kr">배송대행 시작</span></a>
+      <a href="proxy.html" class="btn-secondary">🛍️ <span lang="en">Proxy Purchase</span><span lang="kr">구매대행</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">4 <span style="font-size:1.2rem;">Yrs</span></div>
+    <div class="stat-label" lang="en">Helping global fans shop Korea.</div>
+    <div class="stat-label" lang="kr">글로벌 팬들과 함께한 시간</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">500+</div>
+    <div class="stat-label" lang="en">Orders successfully handled with care.</div>
+    <div class="stat-label" lang="kr">정성껏 처리한 주문 수</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">40+</div>
+    <div class="stat-label" lang="en">Countries safely delivered worldwide.</div>
+    <div class="stat-label" lang="kr">전 세계 배송 국가 수</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-tag" lang="en">What We Do</div>
+  <div class="section-tag" lang="kr">서비스 안내</div>
+  <h2 class="section-title" lang="en">Everything you need<br>to get K-goods delivered.</h2>
+  <h2 class="section-title" lang="kr">K-굿즈를 받아보는<br>모든 방법.</h2>
+  <p class="section-sub" lang="en">From forwarding to proxy purchasing — we've got every fan covered.</p>
+  <p class="section-sub" lang="kr">배송대행부터 구매대행까지 — 팬 여러분을 위해 준비했습니다.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <h3 lang="en">Package Forwarding</h3>
+      <h3 lang="kr">배송대행</h3>
+      <p lang="en">Already purchased from a Korean store? Send it to our warehouse and we'll safely forward it to you anywhere in the world.</p>
+      <p lang="kr">한국 쇼핑몰에서 구매하셨나요? 저희 창고로 보내주시면 전 세계 어디든 안전하게 발송해드립니다.</p>
+      <a href="forwarding.html" class="service-link" lang="en">Get started →</a>
+      <a href="forwarding.html" class="service-link" lang="kr">신청하기 →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <h3 lang="en">Proxy Purchasing</h3>
+      <h3 lang="kr">구매대행</h3>
+      <p lang="en">Found something you want but can't order from abroad? We purchase it on your behalf and ship it to your doorstep.</p>
+      <p lang="kr">해외에서 직접 결제가 어려우신가요? 저희가 대신 구매해서 문 앞까지 배송해드립니다.</p>
+      <a href="proxy.html" class="service-link" lang="en">Request now →</a>
+      <a href="proxy.html" class="service-link" lang="kr">신청하기 →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏪</div>
+      <h3 lang="en">Offline Proxy</h3>
+      <h3 lang="kr">오프라인 대리구매</h3>
+      <p lang="en">Can't be in Seoul for a concert, pop-up, or exhibition? We'll shop in person and secure those limited-edition items for you.</p>
+      <p lang="kr">콘서트, 팝업, 전시회에 직접 못 오시나요? 저희가 현장에서 직접 구매해드립니다.</p>
+      <a href="#contact" class="service-link" lang="en">DM us →</a>
+      <a href="#contact" class="service-link" lang="kr">문의하기 →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3 lang="en">Customizing Service</h3>
+      <h3 lang="kr">커스터마이징</h3>
+      <p lang="en">Need extra protection or unwanted packaging removed? We tailor our packing process to your specific needs.</p>
+      <p lang="kr">불필요한 포장 제거나 특별 패키징이 필요하신가요? 원하시는 대로 맞춰드립니다.</p>
+      <a href="#pricing" class="service-link" lang="en">See pricing →</a>
+      <a href="#pricing" class="service-link" lang="kr">요금 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DONGGLE -->
+<section class="why" id="why">
+  <div class="section-tag" lang="en">Why Fans Choose Donggle</div>
+  <div class="section-tag" lang="kr">동글을 선택하는 이유</div>
+  <h2 class="section-title" lang="en">Built for fans,<br>by fans.</h2>
+  <h2 class="section-title" lang="kr">팬을 위해,<br>팬이 만든 서비스.</h2>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <p lang="en">Proxy buying for Korean-exclusive goods</p>
+      <p lang="kr">한국 한정 상품 구매대행</p>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <p lang="en">In-person pop-up &amp; event purchasing</p>
+      <p lang="kr">팝업 &amp; 이벤트 현장 직접 구매</p>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <p lang="en">Package consolidation to save shipping costs</p>
+      <p lang="kr">합배송으로 배송비 절약</p>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <p lang="en">Real-time photo confirmation &amp; updates</p>
+      <p lang="kr">실시간 사진 확인 &amp; 업데이트</p>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <p lang="en">Friendly support in English</p>
+      <p lang="kr">친절한 영어 &amp; 한국어 응대</p>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <p lang="en">Worldwide shipping options</p>
+      <p lang="kr">전 세계 배송 가능</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--soft);">
+  <div class="section-tag" lang="en">Transparent Pricing</div>
+  <div class="section-tag" lang="kr">요금 안내</div>
+  <h2 class="section-title" lang="en">Simple, fair rates.<br>No hidden fees.</h2>
+  <h2 class="section-title" lang="kr">명확한 요금제.<br>숨겨진 비용 없음.</h2>
+  <p class="section-sub" lang="en">All prices in KRW. Fixed rates — no negotiation, no exceptions.</p>
+  <p class="section-sub" lang="kr">모든 요금 원화(₩) 기준. 고정가 — 개별 할인 및 협상 불가.</p>
+
+  <div class="pricing-wrap">
+    <div class="pricing-tabs">
+      <button class="tab-btn active" onclick="showTab('forwarding', this)" lang="en">Forwarding</button>
+      <button class="tab-btn active" onclick="showTab('forwarding', this)" lang="kr" style="display:none;">배송대행</button>
+      <button class="tab-btn" onclick="showTab('proxy', this)" lang="en">Proxy Purchase</button>
+      <button class="tab-btn" onclick="showTab('proxy', this)" lang="kr" style="display:none;">구매대행</button>
+      <button class="tab-btn" onclick="showTab('custom', this)" lang="en">Customizing</button>
+      <button class="tab-btn" onclick="showTab('custom', this)" lang="kr" style="display:none;">커스터마이징</button>
+    </div>
+
+    <div id="forwarding" class="tab-content active">
+      <table class="price-table">
+        <tr><th lang="en">Service</th><th lang="kr">서비스</th><th lang="en">Fee (₩)</th><th lang="kr">요금 (₩)</th><th lang="en">Notes</th><th lang="kr">비고</th></tr>
+        <tr><td lang="en">Receiving Fee</td><td lang="kr">입고 수수료</td><td class="price-highlight">₩3,000/pkg</td><td class="price-highlight" lang="kr">₩3,000/패키지</td><td lang="en">Includes basic photo + free consolidation</td><td lang="kr">기본 사진 + 합배송 포함</td></tr>
+        <tr><td lang="en">Free Storage</td><td lang="kr">무료 보관</td><td class="price-highlight">Free</td><td class="price-highlight" lang="kr">무료</td><td lang="en">Up to 30 days from arrival</td><td lang="kr">입고일로부터 30일</td></tr>
+        <tr><td lang="en">Extended Storage</td><td lang="kr">연장 보관</td><td class="price-highlight">₩500/day</td><td class="price-highlight" lang="kr">₩500/일</td><td lang="en">After 30 days, per package</td><td lang="kr">30일 초과 시, 패키지당</td></tr>
+        <tr><td lang="en">Box Upgrade (Size 4)</td><td lang="kr">박스 초과 (4호)</td><td>+₩3,000</td><td lang="kr">+₩3,000</td><td lang="en">≤100cm total</td><td lang="kr">세 변 합 ≤100cm</td></tr>
+        <tr><td lang="en">Box Upgrade (Size 5)</td><td lang="kr">박스 초과 (5호)</td><td>+₩5,000</td><td lang="kr">+₩5,000</td><td lang="en">≤118cm total</td><td lang="kr">세 변 합 ≤118cm</td></tr>
+        <tr><td lang="en">Weight 5~10kg</td><td lang="kr">무게 5~10kg</td><td>+₩3,000</td><td lang="kr">+₩3,000</td><td lang="en">Extra handling</td><td lang="kr">추가 취급료</td></tr>
+        <tr><td lang="en">Oversized / Overweight</td><td lang="kr">초과 사이즈/무게</td><td lang="en">Contact us</td><td lang="kr">별도 문의</td><td lang="en">118cm+ or 10kg+</td><td lang="kr">118cm 초과 또는 10kg+</td></tr>
+      </table>
+      <div class="price-note" lang="en">📌 Box surcharges are based on the final outgoing package size, not incoming boxes.</div>
+      <div class="price-note" lang="kr">📌 박스 초과 수수료는 최종 발송 박스 기준입니다. 입고 박스 기준 아님.</div>
+    </div>
+
+    <div id="proxy" class="tab-content">
+      <table class="price-table">
+        <tr><th lang="en">Service</th><th lang="kr">서비스</th><th lang="en">Fee</th><th lang="kr">요금</th><th lang="en">Notes</th><th lang="kr">비고</th></tr>
+        <tr><td lang="en">Online Proxy Purchase</td><td lang="kr">온라인 구매대행</td><td class="price-highlight" lang="en">6% of item price</td><td class="price-highlight" lang="kr">구매금액의 6%</td><td lang="en">Minimum ₩1,000</td><td lang="kr">최소 ₩1,000</td></tr>
+        <tr><td lang="en">Offline Proxy (Pop-up)</td><td lang="kr">오프라인 대리구매</td><td class="price-highlight" lang="en">₩3,000/item (base)</td><td class="price-highlight" lang="kr">₩3,000/개 (기본)</td><td lang="en">20+ items only. Price may vary by item.</td><td lang="kr">20개 이상 Bulk만. 아이템에 따라 차등 적용.</td></tr>
+      </table>
+      <div class="price-note" lang="en">📌 Offline proxy is available on select dates only. DM us for availability.</div>
+      <div class="price-note" lang="kr">📌 오프라인 대리구매는 비정기 운영입니다. 팝업 위주. DM으로 문의해주세요.</div>
+    </div>
+
+    <div id="custom" class="tab-content">
+      <table class="price-table">
+        <tr><th lang="en">Service</th><th lang="kr">서비스</th><th lang="en">Fee (₩)</th><th lang="kr">요금 (₩)</th><th lang="en">Conditions</th><th lang="kr">조건</th></tr>
+        <tr><td lang="en">Unboxing (item selection)</td><td lang="kr">언박싱 (구성품 선별)</td><td class="price-highlight">₩1,000/album</td><td class="price-highlight" lang="kr">₩1,000/앨범</td><td lang="en">Video recorded. Remaining items disposed of.</td><td lang="kr">영상 녹화 필수. 나머지 폐기.</td></tr>
+        <tr><td lang="en">Inclusion-only Shipping</td><td lang="kr">특전 분리 발송</td><td class="price-highlight">Free</td><td class="price-highlight" lang="kr">무료</td><td lang="en">Album disposal consent required. Video recorded.</td><td lang="kr">앨범 폐기 동의 필수. 영상 녹화 필수.</td></tr>
+        <tr><td lang="en">Battery Removal</td><td lang="kr">배터리 제거</td><td class="price-highlight">₩1,000/item</td><td class="price-highlight" lang="kr">₩1,000/개</td><td lang="en">Video recorded.</td><td lang="kr">영상 녹화 필수.</td></tr>
+      </table>
+      <div class="price-note" lang="en">📌 All customizing services are video recorded for dispute prevention. Disposal consent required for inclusion-only shipping.</div>
+      <div class="price-note" lang="kr">📌 모든 커스터마이징 서비스는 분쟁 예방을 위해 영상 녹화됩니다. 특전 분리 발송 시 폐기 동의 필수.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-tag" lang="en">How It Works</div>
+  <div class="section-tag" lang="kr">이용 방법</div>
+  <h2 class="section-title" lang="en">Simple as 1, 2, 3.</h2>
+  <h2 class="section-title" lang="kr">쉽고 간단하게.</h2>
+  <p class="section-sub" lang="en">Getting your K-goods has never been easier.</p>
+  <p class="section-sub" lang="kr">K-굿즈를 받아보는 가장 쉬운 방법.</p>
+  <div class="how-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4 lang="en">Register & Get Address</h4>
+      <h4 lang="kr">회원가입 & 주소 받기</h4>
+      <p lang="en">Sign up and receive your personal Korean warehouse address.</p>
+      <p lang="kr">가입 후 개인 한국 창고 주소를 받으세요.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4 lang="en">Shop & Ship to Us</h4>
+      <h4 lang="kr">쇼핑 & 발송</h4>
+      <p lang="en">Order from any Korean store using your Donggle address.</p>
+      <p lang="kr">동글 주소로 한국 쇼핑몰에서 주문하세요.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4 lang="en">We Receive & Inspect</h4>
+      <h4 lang="kr">입고 & 검수</h4>
+      <p lang="en">Your package arrives. We photo document everything.</p>
+      <p lang="kr">패키지 도착 즉시 사진으로 확인해드립니다.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4 lang="en">Request Shipment</h4>
+      <h4 lang="kr">발송 신청</h4>
+      <p lang="en">Choose your shipping method and pay shipping fees.</p>
+      <p lang="kr">배송 방법을 선택하고 비용을 결제하세요.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <h4 lang="en">Delivered to You 🎉</h4>
+      <h4 lang="kr">수령 완료 🎉</h4>
+      <p lang="en">Track your package and receive your K-goods!</p>
+      <p lang="kr">패키지를 추적하고 K-굿즈를 받아보세요!</p>
+    </div>
+  </div>
+</section>
+
+<!-- SHIPPING -->
+<section id="shipping">
+  <div class="section-tag" lang="en">Shipping Options</div>
+  <div class="section-tag" lang="kr">배송 옵션</div>
+  <h2 class="section-title" lang="en">We ship to 200+<br>countries worldwide.</h2>
+  <h2 class="section-title" lang="kr">전 세계 200개국 이상<br>배송 가능.</h2>
+  <p class="section-sub" lang="en">Multiple carriers to fit every budget and timeline.</p>
+  <p class="section-sub" lang="kr">예산과 일정에 맞는 다양한 배송 옵션.</p>
+  <div class="shipping-grid">
+    <div class="ship-card">
+      <div class="ship-icon">✈️</div>
+      <h4>EMS</h4>
+      <p lang="en">Fast and reliable. Tracks to 200+ countries. Best for most shipments.</p>
+      <p lang="kr">빠르고 안정적. 200개국 이상 추적 가능. 대부분의 발송에 최적.</p>
+      <span class="ship-tag" lang="en">Recommended</span>
+      <span class="ship-tag" lang="kr">추천</span>
+    </div>
+    <div class="ship-card">
+      <div class="ship-icon">📮</div>
+      <h4>K-Packet</h4>
+      <p lang="en">Budget-friendly option for packages under 2kg. Available to 19 countries.</p>
+      <p lang="kr">2kg 이하 알뜰 옵션. 19개국 이용 가능.</p>
+      <span class="ship-tag" lang="en">Budget</span>
+      <span class="ship-tag" lang="kr">저렴</span>
+    </div>
+    <div class="ship-card">
+      <div class="ship-icon">🚀</div>
+      <h4>SF Express</h4>
+      <p lang="en">Ideal for Asia-Pacific region. Fast delivery to China, HK, Taiwan.</p>
+      <p lang="kr">아시아 최적. 중국, 홍콩, 대만 빠른 배송.</p>
+      <span class="ship-tag" lang="en">Asia</span>
+      <span class="ship-tag" lang="kr">아시아</span>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.85rem; opacity:0.6;" lang="en">Don't see your country? <a href="#contact" style="color:var(--accent);">Contact us</a> for options.</p>
+  <p style="margin-top:1.5rem; font-size:0.85rem; opacity:0.6;" lang="kr">국가가 없으신가요? <a href="#contact" style="color:var(--accent);">문의해주세요.</a></p>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="paw-big">🐾</div>
+    <div class="section-tag" lang="en">Our Story</div>
+    <div class="section-tag" lang="kr">우리 이야기</div>
+    <h2 class="section-title" lang="en">Built by Fans,<br>for Fans.</h2>
+    <h2 class="section-title" lang="kr">팬이 만든,<br>팬을 위한 서비스.</h2>
+    <p class="about-body" lang="en">We started Donggle because we were fans too.</p>
+    <p class="about-body" lang="en">We know the frustration of missing a limited release, struggling with Korean checkout systems, or finding a reliable forwarding service.</p>
+    <p class="about-body" lang="en">That's why we created Donggle — a service that treats every single order with the same care we'd want for our own collections.</p>
+    <p class="about-body" lang="kr">동글은 저희 반려견 이름에서 유래했어요. 🐶</p>
+    <p class="about-body" lang="kr">발바닥 로고는 동글을 믿고 찾아와주신 모든 고객님들이 남긴 발자취를 의미합니다.</p>
+    <p class="about-body" lang="kr">2021년 트위터에서 구매/결제대행으로 시작해 고객분들의 요청으로 배송대행까지 확장하게 되었습니다. K-pop을 넘어 다양한 장르의 팬분들이 찾아주시는 서비스가 되었어요.</p>
+    <p style="opacity:0.45; font-style:italic; font-family:'DM Serif Display',serif; font-size:1.1rem; margin-top:2rem;">K-goods, packed with love. 🐾</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-tag" lang="en">Get in Touch</div>
+    <div class="section-tag" lang="kr">문의하기</div>
+    <h2 class="section-title" lang="en">Need Help?</h2>
+    <h2 class="section-title" lang="kr">문의 사항이 있으신가요?</h2>
+    <p class="section-sub" lang="en">Questions about shipping, proxy buying, or special requests?</p>
+    <p class="section-sub" lang="en">Contact us anytime — we're happy to help you get your haul home.</p>
+    <p class="section-sub" lang="kr">배송, 구매대행, 특별 요청 등 궁금한 점이 있으시면 언제든지 연락해주세요.</p>
+    <div class="contact-grid">
+      <a href="mailto:donggle.official@gmail.com" class="contact-item">
+        <span>📧</span>
+        <div class="contact-text">
+          <span class="contact-label" lang="en">Email</span>
+          <span class="contact-label" lang="kr">이메일</span>
+          <span class="contact-val">donggle.official@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/donggle.official" class="contact-item" target="_blank">
+        <span>📸</span>
+        <div class="contact-text">
+          <span class="contact-label">Instagram</span>
+          <span class="contact-val">@donggle.official</span>
+        </div>
+      </a>
+      <a href="https://twitter.com/donggleofficial" class="contact-item" target="_blank">
+        <span>🐦</span>
+        <div class="contact-text">
+          <span class="contact-label">Twitter / X</span>
+          <span class="contact-val">@donggleofficial</span>
+        </div>
+      </a>
+      <a href="https://wa.me/YOUR_NUMBER" class="contact-item" target="_blank">
+        <span>💬</span>
+        <div class="contact-text">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-val">donggle.official</span>
+        </div>
+      </a>
+    </div>
+    <div style="margin-top:1.5rem; text-align:center;">
+      <a href="mailto:donggle.official@gmail.com" class="btn-primary" lang="en">📧 Send us an email</a>
+      <a href="mailto:donggle.official@gmail.com" class="btn-primary" lang="kr">📧 이메일 보내기</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="en.html" class="footer-logo">Donggle 🐾</a>
+  <div class="footer-links">
+    <a href="tos.html" lang="en">Terms of Service</a>
+    <a href="tos.html" lang="kr">이용약관</a>
+    <a href="privacy.html" lang="en">Privacy Policy</a>
+    <a href="privacy.html" lang="kr">개인정보처리방침</a>
+  </div>
+  <span>© 2026 Donggle. K-goods, packed with love.</span>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+function setLang(lang) {
+  document.body.classList.toggle('kr', lang === 'kr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-kr').classList.toggle('active', lang === 'kr');
+
+  document.querySelectorAll('[lang="en"]').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+  document.querySelectorAll('[lang="kr"]').forEach(el => {
+    el.style.display = lang === 'kr' ? '' : 'none';
+  });
+
+  // pricing tabs - show both sets of tabs for current lang
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    if (!el.hasAttribute('lang') || el.getAttribute('lang') === lang) {
+      el.style.display = '';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}
+
+// init: hide kr on load
+setLang('en');
+</script>
+</body>
+</html>
